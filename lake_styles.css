@@ -1,0 +1,234 @@
+﻿@charset "UTF-8";
+/*
+   New Perspectives on HTML5 and CSS3, 7th Edition
+   Tutorial 2
+   Case Problem 4
+   
+   Great Lakescape Lodge Style Sheet
+   Author: Linyuan Han
+   Date: 2026-09-16
+   
+   Filename: lake_styles.css
+*/
+
+/* ========================= 1. 引入 Web 字体样式  ========================= */
+
+/* 花体装饰字体，用于页面各级标题 */
+@font-face {
+   font-family: 'Champagne';
+   src: url('./fonts/cac_champagne.woff') format('woff'),
+      url('./fonts/cac_champagne.ttf') format('truetype');
+}
+
+/* 备用字体样式 */
+@font-face {
+   font-family: 'Dobkin';
+   src: url('./fonts/DobkinPlain.woff') format('woff'),
+      url('./fonts/DobkinPlain.ttf') format('truetype');
+}
+
+/* ======================= 2. 设置整体布局 (Grid 网格布局) =========================== */
+
+/* 整个页面背景色设置为浅黄绿色，统一正文字体，并启用 Grid 网格布局 */
+body {
+   background-color: #cecfa1;
+   font-family: Arial, Helvetica, sans-serif;
+   display: grid;
+   /* 将页面切分为两列：左列占 72%，右列占 28%*/
+   grid-template-columns: 72% 28%;
+}
+
+/* 强制覆盖 lake_layout.css 中的老旧浮动样式，让 Grid 完全接管 */
+body>section#leftcol,
+body>section#rightcol {
+   float: none;
+   margin: 0;
+   width: 100%;
+}
+
+/* 头部和尾部横跨整个页面，从第1根网格线跨越到第3根网格线（占满两列） */
+body>header,
+body>footer {
+   grid-column: 1 / 3;
+}
+
+/* ============================ 3. 设置头部和导航栏 =============================== */
+header>nav {
+   background-color: #784976;
+   padding: 10px 0;
+   /* 上下10px，左右0 */
+}
+
+/* 使用 Flexbox 让导航链接在一行内完美均分排列 */
+header>nav>ul {
+   display: flex;
+   justify-content: space-around;
+   /* 均匀分配每个链接之间的间距 */
+   align-items: center;
+   margin: 0;
+   padding: 0;
+}
+
+header a {
+   color: rgba(255, 255, 255, 0.5);
+   text-decoration: none;
+}
+
+/* 超链接悬停字体变为白色 */
+header a:hover {
+   color: white;
+}
+
+/* ================================ 4. 设置主体的左侧盒子 (#leftcol) ============================== */
+
+/* 左侧盒子背景色为黑色，字体为白色 */
+#leftcol {
+   color: white;
+   background-color: black;
+   /* 直接在父容器开启 Flex 布局并允许换行 */
+   display: flex;
+   flex-wrap: wrap;
+}
+
+/* 强迫标题、图片和段落独占一行 */
+#leftcol>h1,
+#leftcol>img,
+#leftcol>p {
+   width: 100%;
+}
+
+/* 左侧一级标题：使用花体字、增大字号、去除加粗、调整上下边距 */
+#leftcol>h1 {
+   font-family: 'Champagne';
+   font-size: 60px;
+   font-weight: normal;
+   margin: 10px 15px;
+}
+
+/* 设置左侧盒子的段落内容整体的左右内边距 */
+#leftcol>p {
+   padding-left: 20px;
+   padding-right: 30px;
+   /* 放大字号，把多余的单词挤到下一行 */
+   font-size: 1.2em;
+}
+
+/* ============================= 5. 设置主体的左侧盒子里的小盒子 (侧边栏) ================================= */
+
+/* 侧边栏一级标题：居中、去加粗、减小字号、调整行高 */
+#leftcol>aside>h1 {
+   line-height: 0.5;
+   text-align: center;
+   font-weight: normal;
+   font-size: 25px;
+}
+
+/* 侧边栏超链接颜色 */
+#leftcol aside a {
+   color: #f97ee9a5;
+}
+
+#leftcol a:hover {
+   color: white;
+}
+
+/* 左侧大盒子里面的第一个小盒子 (Notes)：设置粉色背景 */
+#leftcol aside:first-of-type {
+   background-color: #f3a78a;
+   flex: 0 0 300px;
+   height: 240px;
+   line-height: 1.5;
+}
+
+/* 左侧大盒子里的第二个小盒子 (Upcoming Events)：设置卡其色背景 */
+#leftcol aside:nth-of-type(2) {
+   background-color: #d3c775;
+   margin-right: 55px;
+   flex: 1;
+}
+
+/* 第二个小盒子里的二级标题：不加粗、减小字号、增加左侧内边距 */
+aside>h2 {
+   font-weight: normal;
+   font-size: 20px;
+   padding-left: 5px;
+}
+
+/* 第二个侧边栏（Upcoming Events）里的活动描述段落 */
+#leftcol aside:nth-of-type(2) p {
+   /* 取消首行缩进，使三行左端对齐 */
+   text-indent: 0;
+   /* 设置固定宽度，迫使文字在 Bailey's 和 for 后面断行 */
+   width: 315px;
+   /* 增加行高 */
+   line-height: 1.1;
+   /* 左内边距 */
+   padding-left: 15px;
+}
+
+/* =========================== 6. 设置主体的右侧盒子 (#rightcol) ============================= */
+
+/* 右侧盒子紫色背景，白色字体 */
+#rightcol {
+   color: white;
+   background-color: #4e2f4d;
+}
+
+/* 右侧二级标题：花体字、去加粗、增大字号、增加左侧内边距 */
+#rightcol h2 {
+   font-family: 'Champagne';
+   font-weight: normal;
+   font-size: 35px;
+   padding-left: 30px;
+}
+
+/* 去除超链接的下划线，更改超链接的半透明颜色 */
+#rightcol a {
+   text-decoration: none;
+   color: rgba(255, 255, 255, 0.6);
+   padding: 10px;
+}
+
+#rightcol a:hover {
+   color: white;
+}
+
+/* 去除无序列表的符号 */
+#rightcol li {
+   list-style: none;
+}
+
+/* ===========================  7. 右侧引用块（用户评价 blockquote）========================== */
+
+/* 引用块文字亮紫色、行高1.2倍、字号17px、顶部内边距 */
+#rightcol blockquote {
+   color: #c46dc4e1;
+   line-height: 1.2;
+   font-size: 17px;
+   padding-top: 50px;
+}
+
+/* 伪元素生成左双引号，无需在HTML中手动书写 */
+#rightcol blockquote::before {
+   content: "\201C";
+   font-family: Arial, sans-serif;
+   font-size: 1.5em;
+   font-weight: bold;
+}
+
+/* 伪元素生成右双引号 */
+#rightcol blockquote::after {
+   content: "\201D";
+   font-family: Arial, sans-serif;
+   font-size: 1.5em;
+   font-weight: bold;
+}
+
+/* ================================ 8. 页脚设置 (Footer)============================== */
+
+/* 深灰色背景、字体为白色、文字居中显示 */
+footer {
+   color: white;
+   text-align: center;
+   background-color: rgb(80, 73, 73);
+}
